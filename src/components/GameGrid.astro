@@ -30,7 +30,7 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
 
   <div class="games-grid" id="games-grid">
     {games.map((game) => (
-      <GameCard 
+      <GameCard
         id={game.id}
         title={game.title}
         category={game.category}
@@ -60,28 +60,28 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
 
 <script>
   // Category filtering
-  const filterButtons = document.querySelectorAll('.filter-button');
-  const gameCards = document.querySelectorAll('.game-card');
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const gameCards = document.querySelectorAll('.game-card');
 
-  filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
       const category = button.dataset.category;
-      
-      // Update active state
+        
+        // Update active state
       filterButtons.forEach((btn) => btn.dataset.active = 'false');
       button.dataset.active = 'true';
 
-      // Filter games
-      gameCards.forEach((card) => {
+        // Filter games
+        gameCards.forEach((card) => {
         const gameCategory = card.querySelector('.game-category')?.textContent?.toLowerCase() || '';
         if (category === 'all' || gameCategory === category) {
           (card as HTMLElement).style.display = '';
-        } else {
+          } else {
           (card as HTMLElement).style.display = 'none';
-        }
+          }
+        });
       });
     });
-  });
 
   // Game viewer functionality
   const playButtons = document.querySelectorAll('.play-button');
@@ -212,7 +212,7 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
     }
-  }
+    }
 
   .game-viewer {
     position: fixed;
@@ -227,7 +227,7 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
     margin: 0;
     padding: 0;
     overflow: hidden;
-  }
+    }
 
   .viewer-header {
     display: flex;
@@ -244,7 +244,7 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
     margin: 0;
     color: white;
     font-size: 1.25rem;
-  }
+    }
 
   .close-button {
     background: none;
