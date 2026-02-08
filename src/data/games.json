@@ -4,7 +4,7 @@
     "title": "2048 Puzzle",
     "category": "Puzzle",
     "url": "https://www.crazygames.com/embed/2048",
-    "thumbnail": "https://via.placeholder.com/300x200?text=2048+Puzzle",
+    "thumbnail": "https://imgs.crazygames.com/games/2048/cover_16x9-1707828856995.png?metadata=none&quality=100&width=1200&height=630&fit=crop",
     "description": "Slide numbered tiles to combine them and reach 2048"
   },
   {
@@ -12,7 +12,7 @@
     "title": "Flappy Bird",
     "category": "Action",
     "url": "https://flappybird.io/",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Flappy+Bird",
+    "thumbnail": "https://img.icons8.com/color/480/000000/game-controller.png",
     "description": "Tap to keep the bird flying and avoid obstacles"
   },
   {
@@ -20,7 +20,7 @@
     "title": "Snake Game",
     "category": "Retro",
     "url": "https://slither.io/",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Snake+Game",
+    "thumbnail": "https://slither.io/s/fbthumb5.jpg",
     "description": "Classic snake game - eat food and grow longer"
   },
   {
@@ -28,7 +28,7 @@
     "title": "Checkers",
     "category": "Strategy",
     "url": "https://www.247checkers.com/",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Checkers",
+    "thumbnail": "https://img.icons8.com/color/480/000000/game-controller.png",
     "description": "Classic checkers game - jump and capture pieces"
   },
   {
@@ -36,7 +36,7 @@
     "title": "Sudoku",
     "category": "Puzzle",
     "url": "https://sudoku.com/",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Sudoku",
+    "thumbnail": "https://img.icons8.com/color/480/000000/game-controller.png",
     "description": "Fill the grid with numbers 1-9"
   },
   {
@@ -44,7 +44,7 @@
     "title": "Tetris",
     "category": "Retro",
     "url": "https://tetris.com/play-tetris",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Tetris",
+    "thumbnail": "https://www.datocms-assets.com/145957/1744284280-tetris-mobile.png?auto=format&fit=max&w=1200",
     "description": "Classic block-stacking puzzle game"
   },
   {
@@ -52,7 +52,7 @@
     "title": "Agar.io",
     "category": "Action",
     "url": "https://agar.io/",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Agar.io",
+    "thumbnail": "https://agar.io/img/1200x630.png",
     "description": "Eat smaller cells and grow bigger"
   },
   {
@@ -60,7 +60,7 @@
     "title": "Chess",
     "category": "Strategy",
     "url": "https://www.chess.com/play/computer",
-    "thumbnail": "https://via.placeholder.com/300x200?text=Chess",
+    "thumbnail": "https://www.chess.com/bundles/web/images/social/share-play-computer.54de6749.png",
     "description": "Play chess against the computer"
   }
 ]

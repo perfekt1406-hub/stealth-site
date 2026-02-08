@@ -12,8 +12,8 @@ export interface Route {
 export const routes: Record<string, Route> = {
   '/reference/archive': {
     path: '/reference/archive',
-    title: 'Academic Reference Archive',
-    description: 'A comprehensive collection of academic reference materials and resources'
+    title: 'Archive - LearningHub',
+    description: 'Browse our collection of learning resources'
   }
 };
 

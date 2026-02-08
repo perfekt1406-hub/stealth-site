@@ -4,15 +4,15 @@ import GameGrid from '../../components/GameGrid.astro';
 ---
 
 <BaseLayout 
-  title="Academic Reference Archive"
-  description="A comprehensive collection of academic reference materials and resources"
+  title="Archive - LearningHub"
+  description="Browse our collection of learning resources"
 >
   <header>
     <nav>
-      <a href="/">← Back to Repository</a>
+      <a href="/">← Back to LearningHub</a>
     </nav>
-    <h1>Academic Reference Archive</h1>
-    <p>Browse our collection of academic resources and reference materials</p>
+    <h1>Archive</h1>
+    <p>Browse our collection of learning resources</p>
   </header>
 
   <main>
@@ -31,12 +31,18 @@ import GameGrid from '../../components/GameGrid.astro';
 
 <style>
   nav {
-    margin-bottom: 1rem;
+    margin: 0 auto clamp(0.75rem, 2vw, 1rem);
+    text-align: center;
+    max-width: var(--max-content-width, min(1200px, 90vw));
+    width: 100%;
+    padding: 0 var(--spacing-unit, clamp(0.5rem, 2vw, 1rem));
+    box-sizing: border-box;
   }
 
   nav a {
     color: var(--accent, #0066cc);
     text-decoration: none;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 
   nav a:hover {
@@ -44,16 +50,19 @@ import GameGrid from '../../components/GameGrid.astro';
   }
 
   .archive-placeholder {
-    max-width: 800px;
+    max-width: min(800px, 90vw);
     margin: 0 auto;
-    padding: 2rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
     background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: clamp(4px, 0.5vw, 8px);
+    box-shadow: 0 clamp(2px, 0.3vw, 4px) clamp(4px, 0.6vw, 6px) rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-sizing: border-box;
   }
 
   .archive-placeholder p {
     color: #000000;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin: 0 auto;
   }
 </style>

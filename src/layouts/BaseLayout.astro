@@ -8,7 +8,7 @@ interface Props {
   description?: string;
 }
 
-const { title = "OpenSource Academic Repository", description = "A comprehensive collection of academic resources and reference materials" } = Astro.props;
+const { title = "LearningHub", description = "A simple website for learning and educational resources" } = Astro.props;
 ---
 
 <!doctype html>
@@ -25,6 +25,9 @@ const { title = "OpenSource Academic Repository", description = "A comprehensive
   </head>
   <body>
     <slot />
+    <footer class="site-footer">
+      <p>Credits: <a href="mailto:perfekt1406@gmail.com">perfekt1406@gmail.com</a></p>
+    </footer>
     <PanicButton />
     <script>
       import { initRouter } from '../scripts/router';

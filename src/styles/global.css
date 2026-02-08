@@ -5,36 +5,69 @@
 :root {
   --accent: #0066cc;
   --accent-bg: #f0f7ff;
+  --base-font-size: clamp(14px, 1.5vw, 16px);
+  --spacing-unit: clamp(0.5rem, 2vw, 1rem);
+  --max-content-width: min(1200px, 90vw);
 }
 
-/* Header styling - black text for title and subheading */
+/* Base responsive typography */
+html {
+  font-size: var(--base-font-size);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header styling - black text for title and subheading, centered and symmetrical */
+header {
+  text-align: center;
+  padding: clamp(1rem, 2.5vw, 1.5rem) var(--spacing-unit);
+  margin: 0 auto;
+  max-width: var(--max-content-width);
+  width: 100%;
+}
+
 header h1 {
   color: #000000;
+  margin: 0 auto;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 header p {
   color: #000000;
+  margin: var(--spacing-unit) auto 0;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
-/* Academic content styling */
+/* Academic content styling - centered and symmetrical */
 main {
-  max-width: 1200px;
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem) var(--spacing-unit);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Marquee container for academic updates */
+/* Marquee container for academic updates - centered and symmetrical */
 .marquee-container {
   background: var(--accent-bg);
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 2rem;
+  padding: clamp(0.5rem, 1.2vw, 0.75rem);
+  border-radius: clamp(4px, 0.5vw, 8px);
+  margin: 0 auto clamp(1rem, 2vw, 1.5rem);
   overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .marquee {
   white-space: nowrap;
   animation: scroll 30s linear infinite;
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
 }
 
 @keyframes scroll {
@@ -46,35 +79,96 @@ main {
   }
 }
 
-/* Search bar styling */
+/* Search bar styling - centered */
 search-bar {
-  margin: 2rem 0;
+  margin: clamp(1.5rem, 3vw, 2rem) auto;
+  display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Academic content sections */
+/* Academic content sections - symmetrical padding */
 .academic-section {
-  margin: 2rem 0;
-  padding: 1.5rem;
+  margin: clamp(1rem, 2vw, 1.5rem) auto;
+  padding: clamp(0.75rem, 2vw, 1rem);
   background: #fafafa;
-  border-left: 4px solid var(--accent);
-  border-radius: 4px;
+  border-left: clamp(3px, 0.4vw, 4px) solid var(--accent);
+  border-radius: clamp(4px, 0.5vw, 8px);
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Subject categories grid */
+.academic-section h2 {
+  margin: 0 0 clamp(0.5rem, 1.2vw, 0.75rem) 0;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+.academic-section p {
+  margin: 0 0 clamp(0.5rem, 1.2vw, 0.75rem) 0;
+  line-height: 1.5;
+}
+
+.academic-section p:last-child {
+  margin-bottom: 0;
+}
+
+.academic-section ul {
+  margin: clamp(0.5rem, 1.2vw, 0.75rem) 0 0;
+  padding-left: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+.academic-section li {
+  margin: 0 0 clamp(0.25rem, 0.6vw, 0.5rem) 0;
+  line-height: 1.5;
+}
+
+.academic-section li:last-child {
+  margin-bottom: 0;
+}
+
+/* Subject categories grid - responsive and symmetrical */
 .subject-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 25vw, 280px), 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin: clamp(1rem, 2vw, 1.5rem) auto;
+  max-width: 100%;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  justify-items: center;
 }
 
 .subject-card {
-  padding: 1.5rem;
+  padding: clamp(0.5rem, 1.2vw, 0.75rem);
   background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border: clamp(1px, 0.1vw, 2px) solid #e0e0e0;
+  border-radius: clamp(4px, 0.5vw, 8px);
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  gap: clamp(0.4rem, 1vw, 0.5rem);
+}
+
+@media (max-width: 768px) {
+  .subject-grid {
+    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 40vw, 250px), 1fr));
+    gap: clamp(0.75rem, 2vw, 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .subject-grid {
+    grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 45vw, 200px), 1fr));
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  }
 }
 
 .subject-card:hover {
@@ -82,28 +176,54 @@ search-bar {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* PDF download buttons */
+/* Subject resources container - centered and symmetrical */
+.subject-resources {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.3rem, 0.8vw, 0.4rem);
+  margin: clamp(0.4rem, 1vw, 0.5rem) auto 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* PDF download buttons - symmetrical margins */
 .pdf-button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.6rem, 1.8vw, 0.75rem) clamp(1rem, 2.5vw, 1.25rem);
   background: var(--accent);
   color: white;
   text-decoration: none;
-  border-radius: 4px;
-  margin: 0.5rem 0.5rem 0.5rem 0;
-  transition: background 0.2s;
+  border-radius: clamp(4px, 0.5vw, 8px);
+  margin: 0;
+  transition: background 0.2s, transform 0.2s;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  box-sizing: border-box;
+  min-height: clamp(44px, 6vw, 48px);
+  min-width: clamp(100px, 15vw, 140px);
+  text-align: center;
 }
 
 .pdf-button:hover {
   background: #0052a3;
+  transform: scale(1.05);
+}
+
+.pdf-button:active {
+  transform: scale(0.95);
 }
 
 /* Last modified timestamps */
 .last-modified {
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 1.2vw, 0.8rem);
   color: #000000;
   font-style: italic;
-  margin-top: 0.5rem;
+  margin: clamp(0.4rem, 1vw, 0.5rem) auto 0;
+  text-align: center;
+  line-height: 1.2;
 }
 
 /* Override Simple.css grey text colors - make all text black on white backgrounds */
@@ -127,6 +247,16 @@ h2, h3, h4, h5, h6 {
 .subject-card p,
 .subject-card h3 {
   color: #000000;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.subject-card h3 {
+  font-size: clamp(1.1rem, 2.3vw, 1.35rem);
+}
+
+.subject-card p {
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
 }
 
 /* Academic section text - ensure black on light background */
@@ -139,4 +269,32 @@ h2, h3, h4, h5, h6 {
 /* Keep text white on colored backgrounds (like buttons) */
 .pdf-button {
   color: white !important;
+}
+
+/* Site footer - centered and symmetrical */
+.site-footer {
+  margin: clamp(1.5rem, 3vw, 2rem) auto 0;
+  padding: clamp(1rem, 2vw, 1.5rem) var(--spacing-unit);
+  text-align: center;
+  border-top: clamp(1px, 0.1vw, 2px) solid #e0e0e0;
+  background: #f9f9f9;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.site-footer p {
+  margin: 0 auto;
+  color: #000000;
+  font-size: clamp(0.85rem, 1.8vw, 0.9rem);
+  max-width: var(--max-content-width);
+}
+
+.site-footer a {
+  color: var(--accent, #0066cc);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
 }
