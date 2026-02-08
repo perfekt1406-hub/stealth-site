@@ -1,0 +1,66 @@
+[
+  {
+    "id": "game-1",
+    "title": "2048 Puzzle",
+    "category": "Puzzle",
+    "url": "https://www.crazygames.com/embed/2048",
+    "thumbnail": "https://via.placeholder.com/300x200?text=2048+Puzzle",
+    "description": "Slide numbered tiles to combine them and reach 2048"
+  },
+  {
+    "id": "game-2",
+    "title": "Flappy Bird",
+    "category": "Action",
+    "url": "https://flappybird.io/",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Flappy+Bird",
+    "description": "Tap to keep the bird flying and avoid obstacles"
+  },
+  {
+    "id": "game-3",
+    "title": "Snake Game",
+    "category": "Retro",
+    "url": "https://slither.io/",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Snake+Game",
+    "description": "Classic snake game - eat food and grow longer"
+  },
+  {
+    "id": "game-4",
+    "title": "Checkers",
+    "category": "Strategy",
+    "url": "https://www.247checkers.com/",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Checkers",
+    "description": "Classic checkers game - jump and capture pieces"
+  },
+  {
+    "id": "game-5",
+    "title": "Sudoku",
+    "category": "Puzzle",
+    "url": "https://sudoku.com/",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Sudoku",
+    "description": "Fill the grid with numbers 1-9"
+  },
+  {
+    "id": "game-6",
+    "title": "Tetris",
+    "category": "Retro",
+    "url": "https://tetris.com/play-tetris",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Tetris",
+    "description": "Classic block-stacking puzzle game"
+  },
+  {
+    "id": "game-7",
+    "title": "Agar.io",
+    "category": "Action",
+    "url": "https://agar.io/",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Agar.io",
+    "description": "Eat smaller cells and grow bigger"
+  },
+  {
+    "id": "game-8",
+    "title": "Chess",
+    "category": "Strategy",
+    "url": "https://www.chess.com/play/computer",
+    "thumbnail": "https://via.placeholder.com/300x200?text=Chess",
+    "description": "Play chess against the computer"
+  }
+]

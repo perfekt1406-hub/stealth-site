@@ -1,0 +1,274 @@
+---
+import GameCard from './GameCard.astro';
+import gamesData from '../data/games.json';
+
+interface Game {
+  id: string;
+  title: string;
+  category: string;
+  url: string;
+  thumbnail?: string;
+  description: string;
+}
+
+const games = gamesData as Game[];
+const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
+---
+
+<div class="games-library">
+  <div class="category-filter">
+    {categories.map((category) => (
+      <button 
+        class="filter-button" 
+        data-category={category.toLowerCase()}
+        data-active={category === 'All' ? 'true' : 'false'}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+
+  <div class="games-grid" id="games-grid">
+    {games.map((game) => (
+      <GameCard 
+        id={game.id}
+        title={game.title}
+        category={game.category}
+        url={game.url}
+        thumbnail={game.thumbnail}
+        description={game.description}
+      />
+    ))}
+  </div>
+
+  <div class="game-viewer" id="game-viewer" style="display: none;">
+    <div class="viewer-header">
+      <h2 id="viewer-title"></h2>
+      <button class="close-button" id="close-viewer">×</button>
+    </div>
+    <iframe 
+      id="game-iframe" 
+      src="" 
+      frameborder="0" 
+      allowfullscreen
+      loading="lazy"
+      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+      allow="fullscreen"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  // Category filtering
+  const filterButtons = document.querySelectorAll('.filter-button');
+  const gameCards = document.querySelectorAll('.game-card');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.category;
+      
+      // Update active state
+      filterButtons.forEach((btn) => btn.dataset.active = 'false');
+      button.dataset.active = 'true';
+
+      // Filter games
+      gameCards.forEach((card) => {
+        const gameCategory = card.querySelector('.game-category')?.textContent?.toLowerCase() || '';
+        if (category === 'all' || gameCategory === category) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Game viewer functionality
+  const playButtons = document.querySelectorAll('.play-button');
+  const gameViewer = document.getElementById('game-viewer');
+  const gameIframe = document.getElementById('game-iframe') as HTMLIFrameElement;
+  const viewerTitle = document.getElementById('viewer-title');
+  const closeButton = document.getElementById('close-viewer');
+
+  playButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const url = button.dataset.gameUrl;
+      const title = button.dataset.gameTitle;
+
+      // #region agent log
+      fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:92',message:'Play button clicked',data:{url,title},timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
+
+      if (url && gameViewer && gameIframe && viewerTitle) {
+        gameIframe.src = url;
+        viewerTitle.textContent = title || 'Game';
+        gameViewer.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+        // #region agent log
+        fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:100',message:'Iframe src set',data:{url},timestamp:Date.now()})}).catch(()=>{});
+        // #endregion
+      }
+    });
+  });
+
+  // Add iframe error handling and content checking
+  if (gameIframe) {
+    gameIframe.addEventListener('load', () => {
+      // #region agent log
+      fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:110',message:'Iframe load event fired',data:{src:gameIframe.src,contentWindow:gameIframe.contentWindow?'exists':'null'},timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
+      
+      // Check if iframe actually has content after a delay
+      setTimeout(() => {
+        try {
+          const iframeDoc = gameIframe.contentDocument || gameIframe.contentWindow?.document;
+          const hasContent = iframeDoc && iframeDoc.body && iframeDoc.body.innerHTML.trim().length > 0;
+          // #region agent log
+          fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:118',message:'Iframe content check',data:{src:gameIframe.src,hasContent,bodyLength:iframeDoc?.body?.innerHTML?.length||0},timestamp:Date.now()})}).catch(()=>{});
+          // #endregion
+        } catch (e) {
+          // #region agent log
+          fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:123',message:'Iframe content access error (CORS)',data:{src:gameIframe.src,error:e.message},timestamp:Date.now()})}).catch(()=>{});
+          // #endregion
+        }
+      }, 1000);
+    });
+
+    gameIframe.addEventListener('error', (e) => {
+      // #region agent log
+      fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:130',message:'Iframe load error event',data:{src:gameIframe.src,error:'Failed to load'},timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
+    });
+  }
+
+  if (closeButton && gameViewer) {
+    closeButton.addEventListener('click', () => {
+      if (gameIframe) {
+        gameIframe.src = '';
+      }
+      gameViewer.style.display = 'none';
+      document.body.style.overflow = ''; // Restore scrolling
+    });
+  }
+
+  // Close on ESC key (only if panic button doesn't handle it)
+  // Note: PanicButton component handles ESC globally and redirects to home
+  // This handler is kept for potential future use but panic button takes priority
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && gameViewer && gameViewer.style.display !== 'none') {
+      // Let panic button handle it - it will close viewer and redirect
+      // This handler is secondary
+    }
+  });
+</script>
+
+<style>
+  .games-library {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .category-filter {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-button {
+    padding: 0.5rem 1.5rem;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #000000;
+    transition: all 0.2s;
+  }
+
+  .filter-button:hover {
+    border-color: var(--accent, #0066cc);
+    background: #f0f7ff;
+  }
+
+  .filter-button[data-active="true"] {
+    background: var(--accent, #0066cc);
+    color: white;
+    border-color: var(--accent, #0066cc);
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .games-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  .game-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .viewer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid #333;
+    flex-shrink: 0;
+    min-height: 50px;
+  }
+
+  .viewer-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.25rem;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.25rem 0.75rem;
+    line-height: 1;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .close-button:hover {
+    color: #ff6b6b;
+  }
+
+  .game-viewer iframe {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border: none;
+    background: #000;
+    display: block;
+  }
+</style>

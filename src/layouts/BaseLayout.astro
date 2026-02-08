@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
+import PanicButton from '../components/PanicButton.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "OpenSource Academic Repository", description = "A comprehensive collection of academic resources and reference materials" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <slot />
+    <PanicButton />
+    <script>
+      import { initRouter } from '../scripts/router';
+      if (typeof window !== 'undefined') {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initRouter);
+        } else {
+          initRouter();
+        }
+      }
+    </script>
+  </body>
+</html>

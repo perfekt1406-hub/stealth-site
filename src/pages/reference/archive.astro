@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameGrid from '../../components/GameGrid.astro';
+---
+
+<BaseLayout 
+  title="Academic Reference Archive"
+  description="A comprehensive collection of academic reference materials and resources"
+>
+  <header>
+    <nav>
+      <a href="/">← Back to Repository</a>
+    </nav>
+    <h1>Academic Reference Archive</h1>
+    <p>Browse our collection of academic resources and reference materials</p>
+  </header>
+
+  <main>
+    <GameGrid />
+  </main>
+</BaseLayout>
+
+<script>
+  import { initRouter } from '../../scripts/router';
+  
+  // Initialize router when page loads
+  if (typeof window !== 'undefined') {
+    initRouter();
+  }
+</script>
+
+<style>
+  nav {
+    margin-bottom: 1rem;
+  }
+
+  nav a {
+    color: var(--accent, #0066cc);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  .archive-placeholder {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .archive-placeholder p {
+    color: #000000;
+  }
+</style>

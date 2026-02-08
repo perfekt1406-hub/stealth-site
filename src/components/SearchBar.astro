@@ -1,0 +1,121 @@
+---
+// SearchBar component with trigger logic
+// Case-sensitive "games" keyword triggers navigation to /reference/archive
+---
+
+<div class="search-container">
+  <form class="search-form" role="search" id="search-form">
+    <input 
+      type="search" 
+      id="academic-search" 
+      name="search" 
+      placeholder="Search academic resources..." 
+      aria-label="Search academic resources"
+      class="search-input"
+    />
+    <button type="submit" class="search-button" aria-label="Search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  import { navigateTo } from '../scripts/router';
+
+  function initSearchTrigger(): void {
+    const searchInput = document.getElementById('academic-search') as HTMLInputElement;
+    const searchForm = document.getElementById('search-form') as HTMLFormElement;
+
+    if (!searchInput || !searchForm) return;
+
+    // Case-sensitive check for "games" keyword
+    function checkSearchTrigger(value: string): void {
+      if (value === 'games') {
+        // Navigate to /reference/archive using router
+        navigateTo('/reference/archive');
+        // Clear the input
+        searchInput.value = '';
+      }
+    }
+
+    // Listen for input changes (real-time check)
+    // Only trigger on exact match to avoid navigation while typing
+    searchInput.addEventListener('keyup', (e) => {
+      const target = e.target as HTMLInputElement;
+      // Only trigger on Enter key or when value exactly matches
+      if (e.key === 'Enter' || target.value === 'games') {
+        checkSearchTrigger(target.value);
+      }
+    });
+
+    // Prevent form submission if "games" is entered
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = searchInput.value.trim();
+      
+      if (value === 'games') {
+        navigateTo('/reference/archive');
+        searchInput.value = '';
+      }
+      // For other searches, you could add normal search functionality here
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSearchTrigger);
+    } else {
+      initSearchTrigger();
+    }
+  }
+</script>
+
+<style>
+  .search-container {
+    margin: 2rem 0 3rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-form {
+    display: flex;
+    max-width: 600px;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent, #0066cc);
+  }
+
+  .search-button {
+    padding: 0.75rem 1.25rem;
+    background: var(--accent, #0066cc);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-button:hover {
+    background: #0052a3;
+  }
+</style>

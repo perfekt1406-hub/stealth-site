@@ -1,0 +1,142 @@
+/* Import Simple.css via CDN - academic styling framework */
+@import url('https://cdn.simplecss.org/simple.min.css');
+
+/* Custom academic styling enhancements */
+:root {
+  --accent: #0066cc;
+  --accent-bg: #f0f7ff;
+}
+
+/* Header styling - black text for title and subheading */
+header h1 {
+  color: #000000;
+}
+
+header p {
+  color: #000000;
+}
+
+/* Academic content styling */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Marquee container for academic updates */
+.marquee-container {
+  background: var(--accent-bg);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.marquee {
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Search bar styling */
+search-bar {
+  margin: 2rem 0;
+}
+
+/* Academic content sections */
+.academic-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #fafafa;
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+}
+
+/* Subject categories grid */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.subject-card {
+  padding: 1.5rem;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.subject-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* PDF download buttons */
+.pdf-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  transition: background 0.2s;
+}
+
+.pdf-button:hover {
+  background: #0052a3;
+}
+
+/* Last modified timestamps */
+.last-modified {
+  font-size: 0.9rem;
+  color: #000000;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Override Simple.css grey text colors - make all text black on white backgrounds */
+body {
+  color: #000000;
+}
+
+p {
+  color: #000000;
+}
+
+li {
+  color: #000000;
+}
+
+h2, h3, h4, h5, h6 {
+  color: #000000;
+}
+
+/* Subject card text - ensure black on white background */
+.subject-card p,
+.subject-card h3 {
+  color: #000000;
+}
+
+/* Academic section text - ensure black on light background */
+.academic-section p,
+.academic-section li,
+.academic-section h2 {
+  color: #000000;
+}
+
+/* Keep text white on colored backgrounds (like buttons) */
+.pdf-button {
+  color: white !important;
+}

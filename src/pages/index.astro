@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBar from '../components/SearchBar.astro';
+import AcademicContent from '../components/AcademicContent.astro';
+---
+
+<BaseLayout 
+  title="OpenSource Academic Repository"
+  description="A comprehensive collection of academic resources and reference materials"
+>
+  <header>
+    <h1>OpenSource Academic Repository</h1>
+    <p>Your comprehensive source for educational resources and reference materials</p>
+  </header>
+
+  <main>
+    <div class="marquee-container">
+      <div class="marquee">
+        📚 New resources added weekly • 📖 Updated study guides available • 📝 Latest academic papers in Technology section
+      </div>
+    </div>
+
+    <SearchBar />
+
+    <AcademicContent />
+  </main>
+</BaseLayout>

@@ -1,0 +1,300 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const topics = [
+    'algebra-basics',
+    'calculus-i',
+    'physics-fundamentals',
+    'organic-chemistry',
+    'world-war-ii',
+    'ancient-rome',
+    'shakespeare-studies',
+    'modern-poetry',
+    'data-structures',
+    'web-development'
+  ];
+
+  return topics.map((topic) => ({
+    params: { topic }
+  }));
+}
+
+const { topic } = Astro.params;
+
+// Generate filler text based on topic
+function generateFillerText(topicName: string): string {
+  const topics: Record<string, string> = {
+    'algebra-basics': `Algebra is a branch of mathematics that deals with symbols and the rules for manipulating those symbols. In elementary algebra, these symbols represent quantities without fixed values, known as variables. The fundamental operations of algebra include addition, subtraction, multiplication, and division, which are used to solve equations and inequalities.
+
+Linear equations form the foundation of algebra. A linear equation is an equation that can be written in the form ax + b = 0, where a and b are constants and x is the variable. Solving linear equations involves isolating the variable on one side of the equation through a series of algebraic manipulations.
+
+Quadratic equations represent another important concept in algebra. These equations take the form ax² + bx + c = 0, where a, b, and c are constants. The quadratic formula provides a method for finding the solutions to any quadratic equation, making it a powerful tool in algebraic problem-solving.
+
+Polynomials are expressions consisting of variables and coefficients, involving operations of addition, subtraction, multiplication, and non-negative integer exponents. Understanding polynomial operations is crucial for advancing in algebra and preparing for more complex mathematical concepts.`,
+
+    'calculus-i': `Calculus is a branch of mathematics that studies continuous change. It is divided into two main branches: differential calculus and integral calculus. Differential calculus concerns the study of rates of change and slopes of curves, while integral calculus focuses on accumulation of quantities and areas under curves.
+
+The concept of limits is fundamental to calculus. A limit describes the behavior of a function as its input approaches a particular value. Limits allow mathematicians to define derivatives and integrals, which are the core operations of calculus.
+
+Derivatives measure the rate of change of a function at any given point. The derivative of a function f(x) at a point x is defined as the limit of the difference quotient as the change in x approaches zero. This concept has applications in physics, engineering, economics, and many other fields.
+
+Integration is the reverse process of differentiation. While derivatives measure rates of change, integrals measure accumulation. The fundamental theorem of calculus connects these two concepts, showing that differentiation and integration are inverse operations.`,
+
+    'physics-fundamentals': `Physics is the natural science that studies matter, motion, and behavior through space and time, along with related concepts of energy and force. Classical mechanics, one of the main branches of physics, describes the motion of macroscopic objects under the influence of forces.
+
+Newton's laws of motion form the foundation of classical mechanics. The first law states that an object at rest will remain at rest, and an object in motion will continue in motion at constant velocity, unless acted upon by an external force. The second law relates force, mass, and acceleration through the equation F = ma. The third law states that for every action, there is an equal and opposite reaction.
+
+Energy is a fundamental concept in physics, existing in various forms including kinetic, potential, thermal, and chemical energy. The law of conservation of energy states that energy cannot be created or destroyed, only transformed from one form to another.
+
+Thermodynamics studies the relationships between heat, work, and energy. The four laws of thermodynamics govern how energy behaves in physical systems, from the behavior of gases to the operation of heat engines.`,
+
+    'organic-chemistry': `Organic chemistry is the study of carbon-containing compounds and their properties, structures, and reactions. Carbon's unique ability to form stable bonds with itself and other elements makes it the basis for all life on Earth.
+
+Hydrocarbons are the simplest organic compounds, consisting only of carbon and hydrogen atoms. They are classified into alkanes, alkenes, and alkynes based on the types of bonds between carbon atoms. Alkanes contain only single bonds, alkenes contain double bonds, and alkynes contain triple bonds.
+
+Functional groups are specific groups of atoms within molecules that determine the characteristic chemical reactions of those molecules. Common functional groups include alcohols, aldehydes, ketones, carboxylic acids, and amines. Understanding functional groups is essential for predicting and understanding organic reactions.
+
+Reaction mechanisms describe the step-by-step process by which reactants are transformed into products. Mechanisms help chemists understand how and why reactions occur, enabling the design of new synthetic pathways and the prediction of reaction outcomes.`,
+
+    'world-war-ii': `World War II was a global conflict that lasted from 1939 to 1945, involving most of the world's nations. It was the deadliest conflict in human history, resulting in an estimated 70-85 million fatalities. The war was fought between two major alliances: the Axis powers, led by Germany, Italy, and Japan, and the Allied powers, led by the United States, the Soviet Union, and the United Kingdom.
+
+The war began with Germany's invasion of Poland on September 1, 1939. This act prompted France and the United Kingdom to declare war on Germany. The conflict quickly spread across Europe, with Germany conquering much of continental Europe through a series of rapid military campaigns known as blitzkrieg.
+
+The Pacific Theater saw Japan's expansion across Southeast Asia and the Pacific islands. The attack on Pearl Harbor on December 7, 1941, brought the United States into the war. The subsequent battles in the Pacific, including Midway, Guadalcanal, and Iwo Jima, were among the most intense of the entire conflict.
+
+The war concluded with the unconditional surrender of Germany in May 1945 and Japan in September 1945, following the atomic bombings of Hiroshima and Nagasaki. The aftermath of World War II reshaped the global political landscape and led to the establishment of the United Nations.`,
+
+    'ancient-rome': `Ancient Rome was a civilization that began as a small agricultural community on the Italian Peninsula around the 8th century BCE and grew to become one of the largest empires in history. The Roman Republic, established in 509 BCE, replaced the Roman Kingdom and lasted until 27 BCE, when it transitioned into the Roman Empire.
+
+Roman law and governance had a profound influence on Western civilization. The Twelve Tables, created around 450 BCE, established the foundation of Roman law. The Roman Republic featured a complex system of checks and balances, with power divided among consuls, the Senate, and various assemblies.
+
+The Roman Empire reached its greatest extent under Trajan in 117 CE, spanning from Britain in the north to Egypt in the south, and from Spain in the west to Mesopotamia in the east. Roman engineering achievements, including aqueducts, roads, and monumental architecture, remain impressive to this day.
+
+Roman culture, language, and legal systems influenced the development of European civilization for centuries. The fall of the Western Roman Empire in 476 CE marked the end of ancient Rome, but its legacy continues to shape modern Western society.`,
+
+    'shakespeare-studies': `William Shakespeare, often called England's national poet, is widely regarded as the greatest writer in the English language. Born in Stratford-upon-Avon in 1564, Shakespeare wrote approximately 39 plays, 154 sonnets, and several narrative poems during his lifetime.
+
+Shakespeare's works are typically divided into three main categories: comedies, tragedies, and histories. His comedies, such as "A Midsummer Night's Dream" and "Much Ado About Nothing," explore themes of love, mistaken identity, and social harmony. His tragedies, including "Hamlet," "Macbeth," and "King Lear," examine the darker aspects of human nature and the consequences of ambition and moral corruption.
+
+Shakespeare's language and poetic techniques revolutionized English literature. He invented or popularized thousands of words and phrases still in use today. His use of iambic pentameter, metaphor, and complex character development set new standards for dramatic writing.
+
+The themes explored in Shakespeare's works—love, jealousy, ambition, power, and the human condition—remain relevant across cultures and time periods. His plays continue to be performed and studied worldwide, demonstrating their enduring appeal and significance.`,
+
+    'modern-poetry': `Modern poetry emerged in the late 19th and early 20th centuries as poets began to break away from traditional forms and explore new modes of expression. This movement was characterized by experimentation with form, free verse, and a focus on individual experience and perception.
+
+The Imagist movement, led by poets like Ezra Pound and H.D., emphasized precise imagery and clear, direct language. These poets rejected the ornate language and strict forms of Victorian poetry in favor of concise, vivid descriptions that captured moments of experience.
+
+Symbolism and metaphor became central tools for modern poets, allowing them to explore complex emotions and ideas through indirect means. Poets like T.S. Eliot and Wallace Stevens used fragmented narratives and allusive language to reflect the complexity of modern life.
+
+Free verse, poetry without regular meter or rhyme, became a hallmark of modern poetry. This form allowed poets greater flexibility to match the rhythm and structure of their poems to their content and meaning. Modern poetry continues to influence contemporary poetic practice, emphasizing innovation and personal expression.`,
+
+    'data-structures': `Data structures are fundamental concepts in computer science that organize and store data in computer memory so that it can be accessed and modified efficiently. Different data structures are suited to different kinds of applications, and some are highly specialized for specific tasks.
+
+Arrays are one of the simplest and most widely used data structures. They store elements in contiguous memory locations, allowing for fast access through indexing. However, arrays have fixed sizes and can be inefficient for insertions and deletions.
+
+Linked lists provide an alternative to arrays, storing elements in nodes that contain both data and a reference to the next node. This structure allows for dynamic sizing and efficient insertions and deletions, though accessing elements requires traversing the list.
+
+Trees are hierarchical data structures that consist of nodes connected by edges. Binary trees, in particular, are widely used for searching and sorting operations. Binary search trees maintain an ordering property that enables efficient search, insertion, and deletion operations.
+
+Hash tables provide average-case constant-time access by using a hash function to map keys to array indices. This makes them ideal for applications requiring fast lookups, such as database indexing and caching systems.`,
+
+    'web-development': `Web development encompasses the creation and maintenance of websites and web applications. It is divided into front-end development, which focuses on the user interface and user experience, and back-end development, which handles server-side logic and database management.
+
+HTML (HyperText Markup Language) provides the structure of web pages, defining elements like headings, paragraphs, links, and images. CSS (Cascading Style Sheets) controls the presentation and layout of HTML elements, enabling responsive design and visual styling.
+
+JavaScript is the programming language that adds interactivity to web pages. It allows developers to manipulate the Document Object Model (DOM), handle user events, and create dynamic content. Modern JavaScript frameworks like React, Vue, and Angular have revolutionized front-end development.
+
+Back-end development involves server-side programming, database management, and API creation. Technologies like Node.js, Python, PHP, and various database systems enable developers to build robust, scalable web applications that can handle complex business logic and data processing.`
+  };
+
+  return topics[topicName.toLowerCase()] || `This resource provides comprehensive information about ${topicName}. The content covers fundamental concepts, key principles, and practical applications relevant to this subject area. Students and researchers will find detailed explanations, examples, and references to support their learning and research endeavors.
+
+The material is organized systematically, beginning with foundational concepts and progressing to more advanced topics. Each section builds upon previous knowledge, ensuring a coherent learning experience. Practical examples and case studies illustrate theoretical concepts, making the content accessible and applicable.
+
+Regular updates ensure that the information remains current and reflects the latest developments in the field. The resource is designed to serve as both a learning tool and a reference guide, suitable for students at various levels of study.`
+}
+
+const pageTitle = topic ? topic.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'Topic';
+const fillerText = topic ? generateFillerText(topic) : 'Content not found.';
+---
+
+<BaseLayout 
+  title={`${pageTitle} - OpenSource Academic Repository`}
+  description={`Academic resource: ${pageTitle}`}
+>
+  <header>
+    <nav>
+      <a href="/">← Back to Repository</a>
+    </nav>
+    <h1>{pageTitle}</h1>
+  </header>
+
+  <main>
+    <div class="topic-content">
+      <div class="star-container">
+        <button 
+          id="star-button" 
+          class="star-button" 
+          data-topic={topic}
+          aria-label="Star this resource"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </button>
+        <span id="star-status" class="star-status"></span>
+      </div>
+      
+      <article class="topic-article">
+        <p>{fillerText}</p>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  // Star functionality using localStorage
+  const starButton = document.getElementById('star-button');
+  const starStatus = document.getElementById('star-status');
+  const topic = starButton?.dataset.topic;
+
+  function getStarredTopics(): string[] {
+    const stored = localStorage.getItem('starredTopics');
+    return stored ? JSON.parse(stored) : [];
+  }
+
+  function saveStarredTopics(topics: string[]): void {
+    localStorage.setItem('starredTopics', JSON.stringify(topics));
+  }
+
+  function isStarred(topic: string): boolean {
+    return getStarredTopics().includes(topic);
+  }
+
+  function updateStarButton(isStarred: boolean): void {
+    if (!starButton) return;
+    
+    const svg = starButton.querySelector('svg');
+    
+    if (isStarred) {
+      starButton.classList.add('starred');
+      if (svg) {
+        svg.style.fill = '#ffd700';
+        svg.style.stroke = '#ffd700';
+      }
+      starStatus.textContent = 'Starred';
+    } else {
+      starButton.classList.remove('starred');
+      if (svg) {
+        svg.style.fill = 'none';
+        svg.style.stroke = 'currentColor';
+      }
+      starStatus.textContent = '';
+    }
+  }
+
+  function toggleStar(): void {
+    if (!topic) return;
+    
+    const starred = getStarredTopics();
+    const index = starred.indexOf(topic);
+    
+    if (index > -1) {
+      // Already starred - unstar it
+      starred.splice(index, 1);
+      updateStarButton(false);
+    } else {
+      // Not starred - star it and unstar any other topic
+      // Only one topic can be starred at a time
+      starred.length = 0; // Clear all starred topics
+      starred.push(topic); // Add current topic
+      updateStarButton(true);
+    }
+    
+    saveStarredTopics(starred);
+  }
+
+  if (starButton && topic) {
+    // Initialize star state
+    updateStarButton(isStarred(topic));
+    
+    // Add click handler
+    starButton.addEventListener('click', toggleStar);
+  }
+</script>
+
+<style>
+  nav {
+    margin-bottom: 1rem;
+  }
+
+  nav a {
+    color: var(--accent, #0066cc);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  .topic-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .star-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .star-button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: #666;
+  }
+
+  .star-button:hover {
+    color: #ffd700;
+  }
+
+  .star-button.starred {
+    color: #ffd700;
+  }
+
+  .star-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .star-button.starred svg {
+    fill: #ffd700;
+    stroke: #ffd700;
+  }
+
+  .star-status {
+    color: #000000;
+    font-size: 0.9rem;
+  }
+
+  .topic-article {
+    line-height: 1.8;
+    background: white;
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .topic-article p {
+    color: #000000;
+    margin-bottom: 1rem;
+  }
+</style>
