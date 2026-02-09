@@ -12,7 +12,7 @@
     "title": "Flappy Bird",
     "category": "Action",
     "url": "https://flappybird.io/",
-    "thumbnail": "https://img.icons8.com/color/480/000000/game-controller.png",
+    "thumbnail": "https://img.itch.zone/aW1nLzE1NDIzMDU2LnBuZw==/original/LWG96t.png",
     "description": "Tap to keep the bird flying and avoid obstacles"
   },
   {
@@ -20,7 +20,7 @@
     "title": "Snake Game",
     "category": "Retro",
     "url": "https://slither.io/",
-    "thumbnail": "https://slither.io/s/fbthumb5.jpg",
+    "thumbnail": "http://slither.io/s/fbthumb5.jpg",
     "description": "Classic snake game - eat food and grow longer"
   },
   {
@@ -28,7 +28,7 @@
     "title": "Checkers",
     "category": "Strategy",
     "url": "https://www.247checkers.com/",
-    "thumbnail": "https://img.icons8.com/color/480/000000/game-controller.png",
+    "thumbnail": "https://www.247checkers.com/images/how-to-play/Checkers-start1.png",
     "description": "Classic checkers game - jump and capture pieces"
   },
   {
@@ -36,7 +36,7 @@
     "title": "Sudoku",
     "category": "Puzzle",
     "url": "https://sudoku.com/",
-    "thumbnail": "https://img.icons8.com/color/480/000000/game-controller.png",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/1200px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png",
     "description": "Fill the grid with numbers 1-9"
   },
   {
