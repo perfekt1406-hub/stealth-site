@@ -12,7 +12,9 @@ export async function getStaticPaths() {
     'shakespeare-studies',
     'modern-poetry',
     'data-structures',
-    'web-development'
+    'web-development',
+    'world-geography',
+    'physical-geography'
   ];
 
   return topics.map((topic) => ({
@@ -105,7 +107,23 @@ HTML (HyperText Markup Language) provides the structure of web pages, defining e
 
 JavaScript is the programming language that adds interactivity to web pages. It allows developers to manipulate the Document Object Model (DOM), handle user events, and create dynamic content. Modern JavaScript frameworks like React, Vue, and Angular have revolutionized front-end development.
 
-Back-end development involves server-side programming, database management, and API creation. Technologies like Node.js, Python, PHP, and various database systems enable developers to build robust, scalable web applications that can handle complex business logic and data processing.`
+Back-end development involves server-side programming, database management, and API creation. Technologies like Node.js, Python, PHP, and various database systems enable developers to build robust, scalable web applications that can handle complex business logic and data processing.`,
+
+    'world-geography': `World geography is the study of the Earth's physical features, human populations, and the relationships between people and their environments across different regions and continents. It encompasses both physical geography, which examines natural landscapes and processes, and human geography, which focuses on human activities and their spatial patterns.
+
+The Earth is divided into continents, each with distinct physical characteristics, climates, and ecosystems. Understanding continental geography helps explain patterns of human settlement, economic development, and cultural diversity. Major geographic features such as mountain ranges, rivers, and coastlines have shaped human history and continue to influence modern societies.
+
+Climate zones vary from tropical regions near the equator to polar regions at the poles, creating diverse environments that support different types of vegetation, wildlife, and human activities. These climatic variations influence agriculture, settlement patterns, and economic opportunities across the globe.
+
+Geographic knowledge is essential for understanding global issues such as climate change, resource distribution, migration patterns, and international relations. It provides the spatial context needed to analyze and address complex challenges facing our interconnected world.`,
+
+    'physical-geography': `Physical geography is the branch of geography that studies the natural features and processes of the Earth's surface. It examines landforms, climate, vegetation, soils, and water systems, and how these elements interact to create the diverse landscapes we observe.
+
+Landforms are shaped by various geological processes including tectonic activity, erosion, and deposition. Mountains form through tectonic collisions and volcanic activity, while valleys and canyons are carved by rivers and glaciers over millions of years. Understanding these processes helps explain the distribution of natural resources and the challenges of human settlement.
+
+Climate systems are driven by solar radiation, atmospheric circulation, and ocean currents. These factors create distinct climate zones that determine the types of ecosystems that can develop in different regions. From tropical rainforests to arctic tundra, each climate zone supports unique plant and animal communities adapted to local conditions.
+
+Hydrological systems, including rivers, lakes, and groundwater, play crucial roles in shaping landscapes and supporting life. Water cycles through the atmosphere, oceans, and land, influencing weather patterns and providing essential resources for human and natural systems. The study of physical geography helps us understand environmental changes and manage natural resources sustainably.`
   };
 
   return topics[topicName.toLowerCase()] || `This resource provides comprehensive information about ${topicName}. The content covers fundamental concepts, key principles, and practical applications relevant to this subject area. Students and researchers will find detailed explanations, examples, and references to support their learning and research endeavors.

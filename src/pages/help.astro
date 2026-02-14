@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Help & Tutorial - LearningHub"
+  description="Learn how to use LearningHub and access educational resources"
+>
+  <header>
+    <nav>
+      <a href="/">← Back to LearningHub</a>
+    </nav>
+    <h1>Help & Tutorial</h1>
+    <p>Learn how to use LearningHub effectively</p>
+  </header>
+
+  <main>
+    <div class="help-content">
+      <section class="help-section">
+        <h2>What is This Website?</h2>
+        <p>This is a gaming website disguised as an educational site. The homepage appears to be "LearningHub" but actually provides access to online games. The disguise allows you to quickly switch to educational-looking content if needed.</p>
+      </section>
+
+      <section class="help-section">
+        <h2>Quick Reference</h2>
+        <table class="reference-table">
+          <tr>
+            <th>Action</th>
+            <th>How To</th>
+          </tr>
+          <tr>
+            <td>Access Games</td>
+            <td>Type "games" in the search bar</td>
+          </tr>
+          <tr>
+            <td>Panic Button</td>
+            <td>Press ESC key</td>
+          </tr>
+          <tr>
+            <td>Star Topics</td>
+            <td>Click star button on any topic page</td>
+          </tr>
+          <tr>
+            <td>Get Help</td>
+            <td>Type "help" in the search bar</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="help-section">
+        <h2>How to Use</h2>
+        <ul class="features-list">
+          <li><strong>Access Games:</strong> Type "games" in the search bar to browse and play games by category (Action, Puzzle, Retro, Strategy). Click "Play Now" to open games in full-screen.</li>
+          <li><strong>Panic Button (ESC):</strong> Press ESC at any time to instantly close games and redirect to an educational topic page. If you've starred a topic, it takes you there; otherwise, it picks a random topic.</li>
+          <li><strong>Star System:</strong> Click the star button on any topic page to mark it as your panic destination. The panic button will always take you to your starred topic.</li>
+          <li><strong>Stealth Mode:</strong> The site is designed to look like an educational platform. Games are hidden behind the "games" keyword and not visible on the homepage.</li>
+          <li><strong>Game Library:</strong> Access games including 2048, Flappy Bird, Snake, Checkers, Sudoku, Tetris, Chess, and more.</li>
+          <li><strong>Educational Facade:</strong> Browse subject categories (Math, Science, History, Literature, Technology, Geography) and topic pages that look completely legitimate.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  nav {
+    margin: 0 auto clamp(0.75rem, 2vw, 1rem);
+    text-align: center;
+    max-width: var(--max-content-width, min(1200px, 90vw));
+    width: 100%;
+    padding: 0 var(--spacing-unit, clamp(0.5rem, 2vw, 1rem));
+    box-sizing: border-box;
+  }
+
+  nav a {
+    color: var(--accent, #0066cc);
+    text-decoration: none;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  .help-content {
+    max-width: min(900px, 90vw);
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 var(--spacing-unit, clamp(0.5rem, 2vw, 1rem));
+    box-sizing: border-box;
+  }
+
+  .help-section {
+    margin: 0 0 clamp(2rem, 4vw, 2.5rem) 0;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: white;
+    border-radius: clamp(4px, 0.5vw, 8px);
+    box-shadow: 0 clamp(2px, 0.3vw, 4px) clamp(4px, 0.6vw, 6px) rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+
+  .help-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .help-section h2 {
+    color: #000000;
+    margin: 0 0 clamp(0.75rem, 1.5vw, 1rem) 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .help-section p {
+    color: #000000;
+    margin: 0 0 clamp(0.75rem, 1.5vw, 1rem) 0;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    line-height: 1.6;
+  }
+
+  .help-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .tutorial-steps {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin: clamp(1rem, 2vw, 1.5rem) 0 0;
+  }
+
+  .step {
+    padding: clamp(0.75rem, 1.5vw, 1rem);
+    background: #f9f9f9;
+    border-left: clamp(3px, 0.4vw, 4px) solid var(--accent, #0066cc);
+    border-radius: clamp(4px, 0.5vw, 8px);
+  }
+
+  .step h3 {
+    color: #000000;
+    margin: 0 0 clamp(0.5rem, 1vw, 0.75rem) 0;
+    font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  }
+
+  .step p {
+    color: #000000;
+    margin: 0;
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    line-height: 1.5;
+  }
+
+  .features-list {
+    margin: clamp(1rem, 2vw, 1.5rem) 0 0;
+    padding-left: clamp(1.5rem, 3vw, 2rem);
+    color: #000000;
+  }
+
+  .features-list li {
+    margin: 0 0 clamp(0.75rem, 1.5vw, 1rem) 0;
+    line-height: 1.6;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+  }
+
+  .features-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .features-list strong {
+    color: #000000;
+  }
+
+  .reference-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: clamp(1rem, 2vw, 1.5rem) 0 0;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+  }
+
+  .reference-table th,
+  .reference-table td {
+    padding: clamp(0.75rem, 1.5vw, 1rem);
+    text-align: left;
+    border: clamp(1px, 0.1vw, 2px) solid #e0e0e0;
+    color: #000000;
+  }
+
+  .reference-table th {
+    background: var(--accent-bg, #f0f7ff);
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .reference-table tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+
+  .reference-table tr:hover {
+    background: #f0f7ff;
+  }
+</style>

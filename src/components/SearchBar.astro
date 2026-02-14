@@ -1,6 +1,6 @@
 ---
 // SearchBar component with trigger logic
-// Case-sensitive "games" keyword triggers navigation to /reference/archive
+// Keywords: "games" -> /reference/archive, "help" -> /help
 ---
 
 <div class="search-container">
@@ -31,11 +31,17 @@
 
     if (!searchInput || !searchForm) return;
 
-    // Case-sensitive check for "games" keyword
+    // Case-sensitive check for keywords
     function checkSearchTrigger(value: string): void {
-      if (value === 'games') {
+      const trimmedValue = value.trim().toLowerCase();
+      if (trimmedValue === 'games') {
         // Navigate to /reference/archive using router
         navigateTo('/reference/archive');
+        // Clear the input
+        searchInput.value = '';
+      } else if (trimmedValue === 'help') {
+        // Navigate to /help page
+        window.location.href = '/help';
         // Clear the input
         searchInput.value = '';
       }
@@ -45,19 +51,23 @@
     // Only trigger on exact match to avoid navigation while typing
     searchInput.addEventListener('keyup', (e) => {
       const target = e.target as HTMLInputElement;
+      const trimmedValue = target.value.trim().toLowerCase();
       // Only trigger on Enter key or when value exactly matches
-      if (e.key === 'Enter' || target.value === 'games') {
+      if (e.key === 'Enter' || trimmedValue === 'games' || trimmedValue === 'help') {
         checkSearchTrigger(target.value);
       }
     });
 
-    // Prevent form submission if "games" is entered
+    // Prevent form submission if keywords are entered
     searchForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const value = searchInput.value.trim();
+      const value = searchInput.value.trim().toLowerCase();
       
       if (value === 'games') {
         navigateTo('/reference/archive');
+        searchInput.value = '';
+      } else if (value === 'help') {
+        window.location.href = '/help';
         searchInput.value = '';
       }
       // For other searches, you could add normal search functionality here

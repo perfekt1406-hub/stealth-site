@@ -25,10 +25,11 @@ body {
 /* Header styling - black text for title and subheading, centered and symmetrical */
 header {
   text-align: center;
-  padding: clamp(1rem, 2.5vw, 1.5rem) var(--spacing-unit);
-  margin: 0 auto;
-  max-width: var(--max-content-width);
+  padding: clamp(0.5rem, 1.2vw, 0.75rem) 0;
+  margin: 0;
+  max-width: 100%;
   width: 100%;
+  box-sizing: border-box;
 }
 
 header h1 {
@@ -272,15 +273,21 @@ h2, h3, h4, h5, h6 {
 }
 
 /* Site footer - centered and symmetrical */
+footer.site-footer,
 .site-footer {
-  margin: clamp(1.5rem, 3vw, 2rem) auto 0;
-  padding: clamp(1rem, 2vw, 1.5rem) var(--spacing-unit);
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0 !important;
+  padding: clamp(1rem, 2vw, 1.5rem) 0 !important;
   text-align: center;
   border-top: clamp(1px, 0.1vw, 2px) solid #e0e0e0;
   background: #f9f9f9;
-  max-width: 100%;
-  width: 100%;
+  max-width: 100vw !important;
+  width: 100vw !important;
   box-sizing: border-box;
+  position: relative;
+  left: 50% !important;
+  right: auto !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
 }
 
 .site-footer p {
