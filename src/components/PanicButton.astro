@@ -34,10 +34,6 @@
 
   function getTargetTopic(): string {
     const starred = getStarredTopics();
-    
-    // #region agent log
-    fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'PanicButton.astro:30',message:'Getting target topic',data:{starredCount:starred.length,starredTopics:starred},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
 
     if (starred.length > 0) {
       // Pick a random starred topic
@@ -58,19 +54,11 @@
         e.preventDefault();
         e.stopPropagation();
 
-        // #region agent log
-        fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'PanicButton.astro:50',message:'ESC key pressed - panic button triggered',data:{timestamp:Date.now()},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
-
         // Close any open game viewer immediately
         const gameViewer = document.getElementById('game-viewer');
         const gameIframe = document.getElementById('game-iframe') as HTMLIFrameElement;
         
         if (gameViewer && gameViewer.style.display !== 'none') {
-          // #region agent log
-          fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'PanicButton.astro:59',message:'Closing game viewer',data:{timestamp:Date.now()},timestamp:Date.now()})}).catch(()=>{});
-          // #endregion
-          
           if (gameIframe) {
             gameIframe.src = '';
           }
@@ -83,10 +71,6 @@
         const targetPath = `/topic/${targetTopic}`;
 
         // Navigate to topic page immediately (instant redirect)
-        // #region agent log
-        fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'PanicButton.astro:74',message:'Redirecting to topic',data:{targetTopic,targetPath,currentPath:window.location.pathname},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
-        
         window.location.href = targetPath;
       }
     }, true); // Use capture phase to ensure this runs first

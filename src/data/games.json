@@ -49,18 +49,23 @@
   },
   {
     "id": "game-7",
-    "title": "Agar.io",
-    "category": "Action",
-    "url": "https://agar.io/",
-    "thumbnail": "https://agar.io/img/1200x630.png",
-    "description": "Eat smaller cells and grow bigger"
+    "title": "Chess",
+    "category": "Strategy",
+    "url": "https://www.247chess.com/",
+    "description": "Play chess on an interactive board"
   },
   {
     "id": "game-8",
-    "title": "Chess",
-    "category": "Strategy",
-    "url": "https://www.chess.com/play/computer",
-    "thumbnail": "https://www.chess.com/bundles/web/images/social/share-play-computer.54de6749.png",
-    "description": "Play chess against the computer"
+    "title": "Escape Road 2",
+    "category": "Action",
+    "url": "https://escaperoadcity2.io/escape-road-city-2.embed",
+    "description": "Race through traffic and escape the city"
+  },
+  {
+    "id": "game-9",
+    "title": "Crossy Road",
+    "category": "Action",
+    "url": "https://crossyroadgame.io/crossy-road-game.embed",
+    "description": "Help the chicken cross the road without getting hit"
   }
 ]

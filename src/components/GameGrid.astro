@@ -1,6 +1,7 @@
 ---
 import GameCard from './GameCard.astro';
 import gamesData from '../data/games.json';
+import { getProxiedGameUrl } from '../utils/gameProxy';
 
 interface Game {
   id: string;
@@ -12,6 +13,7 @@ interface Game {
 }
 
 const games = gamesData as Game[];
+const proxiedGames = games.map(game => ({ ...game, url: getProxiedGameUrl(game.url) }));
 const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
 ---
 
@@ -29,7 +31,7 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
   </div>
 
   <div class="games-grid" id="games-grid">
-    {games.map((game) => (
+    {proxiedGames.map((game) => (
       <GameCard
         id={game.id}
         title={game.title}
@@ -52,8 +54,7 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
       frameborder="0" 
       allowfullscreen
       loading="lazy"
-      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-      allow="fullscreen"
+      allow="fullscreen; autoplay; microphone; camera"
     ></iframe>
   </div>
 </div>
@@ -95,52 +96,39 @@ const categories = ['All', 'Action', 'Puzzle', 'Retro', 'Strategy'];
       const url = button.dataset.gameUrl;
       const title = button.dataset.gameTitle;
 
-      // #region agent log
-      fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:92',message:'Play button clicked',data:{url,title},timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
-
       if (url && gameViewer && gameIframe && viewerTitle) {
+        // Clear any existing reset checkers from previous games
+        if ((window as any).__currentResetChecker) {
+          clearInterval((window as any).__currentResetChecker);
+        }
+
+        // Store original URL to detect and prevent resets
+        const originalUrl = url;
+        const preventReset = () => {
+          // Only restore if this is still the current game (check if viewer is still showing this game)
+          if (gameViewer.style.display !== 'none' && gameIframe.src !== originalUrl && gameIframe.src !== '' && gameIframe.src.includes('localhost')) {
+            // Iframe was reset to archive page - restore the game URL
+            gameIframe.src = originalUrl;
+          }
+        };
+        const checkForReset = setInterval(preventReset, 100);
+        (window as any).__currentResetChecker = checkForReset;
+
         gameIframe.src = url;
         viewerTitle.textContent = title || 'Game';
         gameViewer.style.display = 'block';
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
-        // #region agent log
-        fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:100',message:'Iframe src set',data:{url},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
+        // Clear reset checker after 10 seconds (give games time to load)
+        setTimeout(() => {
+          if ((window as any).__currentResetChecker === checkForReset) {
+            clearInterval(checkForReset);
+            (window as any).__currentResetChecker = null;
+          }
+        }, 10000);
       }
     });
   });
-
-  // Add iframe error handling and content checking
-  if (gameIframe) {
-    gameIframe.addEventListener('load', () => {
-      // #region agent log
-      fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:110',message:'Iframe load event fired',data:{src:gameIframe.src,contentWindow:gameIframe.contentWindow?'exists':'null'},timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
-      
-      // Check if iframe actually has content after a delay
-      setTimeout(() => {
-        try {
-          const iframeDoc = gameIframe.contentDocument || gameIframe.contentWindow?.document;
-          const hasContent = iframeDoc && iframeDoc.body && iframeDoc.body.innerHTML.trim().length > 0;
-          // #region agent log
-          fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:118',message:'Iframe content check',data:{src:gameIframe.src,hasContent,bodyLength:iframeDoc?.body?.innerHTML?.length||0},timestamp:Date.now()})}).catch(()=>{});
-          // #endregion
-        } catch (e) {
-          // #region agent log
-          fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:123',message:'Iframe content access error (CORS)',data:{src:gameIframe.src,error:e.message},timestamp:Date.now()})}).catch(()=>{});
-          // #endregion
-        }
-      }, 1000);
-    });
-
-    gameIframe.addEventListener('error', (e) => {
-      // #region agent log
-      fetch('http://127.0.0.1:7245/ingest/7d8b9925-f31a-4a15-803a-7f6dc755d070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GameGrid.astro:130',message:'Iframe load error event',data:{src:gameIframe.src,error:'Failed to load'},timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
-    });
-  }
 
   if (closeButton && gameViewer) {
     closeButton.addEventListener('click', () => {

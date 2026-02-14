@@ -186,6 +186,15 @@ const { id, title, category, url, thumbnail, description } = Astro.props;
             placeholder.style.display = 'flex';
           }
         });
+        
+        // Check if image already loaded or errored before listener attached
+        if (img.complete && (img.naturalWidth === 0 || img.naturalHeight === 0)) {
+          img.style.display = 'none';
+          const placeholder = card.querySelector('.game-placeholder') as HTMLElement;
+          if (placeholder) {
+            placeholder.style.display = 'flex';
+          }
+        }
       }
     });
   });
